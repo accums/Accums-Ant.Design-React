@@ -24,14 +24,12 @@ export default () => {
         {
           title: '角色名称',
           dataIndex: 'roleName',
-          align: "center",
           width: 150
         },
         {
           title: '数据范围',
           dataIndex: 'dataScopeType',
           valueType: 'select',
-          align: "center",
           hideInSearch: true,
           width: 100,
           request: async () => {
@@ -47,7 +45,6 @@ export default () => {
           title: '角色类型',
           dataIndex: 'dataType',
           valueType: 'select',
-          align: "center",
           hideInSearch: true,
           width: 100,
           request: async () => {
@@ -63,14 +60,12 @@ export default () => {
           dataIndex: 'roleSort',
           hideInSearch: true,
           width: 100,
-          align: "center"
         },
         {
           title: '启用',
           dataIndex: 'status',
           valueType: "switch",
           hideInSearch: true,
-          align: "center",
           width: 100,
           render: (text, record) => {
             return (
