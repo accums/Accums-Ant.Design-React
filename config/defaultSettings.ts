@@ -1,8 +1,6 @@
-import { ProLayoutProps } from '@ant-design/pro-components';
+import {ProLayoutProps} from '@ant-design/pro-components';
 
-/**
- * @name
- */
+
 const Settings: ProLayoutProps & {
   pwa?: boolean;
   logo?: string;
@@ -14,6 +12,8 @@ const Settings: ProLayoutProps & {
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
+  waterMarkProps: {content: 'accums@pm.me'},
+  pageTitleRender:false,
   pwa: true,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   token: {},

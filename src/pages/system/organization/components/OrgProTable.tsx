@@ -70,8 +70,8 @@ export default (props: { dataSource: any }) => {
                         valueType: 'option',
                         align: "center",
                         render: (text, record) => [
-                            <EditOrgModalForm trigger={<a>编辑</a>} actionRef={actionRef} orgId={record.orgId}/>,
-                            <DelOrgPopConfirm trigger={<a>删除</a>} actionRef={actionRef} orgId={record.orgId}/>,
+                            <EditOrgModalForm key={"EditOrgModalForm"} trigger={<a>编辑</a>} actionRef={actionRef} orgId={record.orgId}/>,
+                            <DelOrgPopConfirm key={"DelOrgPopConfirm"} trigger={<a>删除</a>} actionRef={actionRef} orgId={record.orgId}/>,
                         ],
                     },
                 ]}
@@ -86,7 +86,7 @@ export default (props: { dataSource: any }) => {
                 request={props.dataSource}
                 toolbar={{
                     actions: [
-                        <AddOrgModalForm trigger={"新建机构"} actionRef={actionRef}/>,
+                        <AddOrgModalForm key={"AddOrgModalForm"} trigger={"新建机构"} actionRef={actionRef}/>,
                     ],
                 }}
             />
