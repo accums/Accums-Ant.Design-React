@@ -1,15 +1,17 @@
 import {ActionType, ModalForm, ProTable} from '@ant-design/pro-components';
 import React, {} from 'react';
 import {getTenantDataSourceByTenantId} from "@/pages/system/tenant/api/TenantDataSourceApi";
-import {Alert} from "antd";
+import {Alert, Button} from "antd";
+import {DatabaseOutlined} from "@ant-design/icons";
 
 export default (props: { tenant: any }) => {
   const actionRef = React.useRef<ActionType>();
 
   return (
     <ModalForm<any>
-      title="租户关联数据源列表"
-      trigger={<a>数据源</a>}
+      title="租户已关联数据源列表"
+      trigger={<Button ghost size={"small"} style={{marginRight: '10px'}} type="primary"
+                       icon={<DatabaseOutlined />}>数据源</Button>}
       submitter={false}
     >
       <Alert message="租户目前只能绑定一个数据源 切换或移除数据源请联系管理人员" type="info" showIcon banner />

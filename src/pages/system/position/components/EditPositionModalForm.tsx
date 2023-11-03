@@ -4,9 +4,10 @@ import {
     ProFormText,
     ProFormTextArea,
 } from '@ant-design/pro-components';
-import {message, Tag} from 'antd';
+import {Button, message, Tag} from 'antd';
 import React, {} from "react";
 import {editSysPosition, getSysPositionById} from "@/pages/system/position/api/PositionApi";
+import {EditOutlined} from "@ant-design/icons";
 
 export default (props: { actionRef: any, positionId: any }) => {
 
@@ -17,8 +18,9 @@ export default (props: { actionRef: any, positionId: any }) => {
                 wrapperCol: {span: 14},
             }}
             layout={"horizontal"}
-            title="编辑职位"
-            trigger={<a>编辑</a>}
+            title="更新职位信息"
+            trigger={<Button ghost size={"small"} style={{marginRight: '10px'}} type="primary"
+                             icon={<EditOutlined/>}>更新</Button>}
             autoFocusFirstInput
             modalProps={{
                 destroyOnClose: true,

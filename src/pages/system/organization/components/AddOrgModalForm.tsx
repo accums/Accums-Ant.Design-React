@@ -38,7 +38,7 @@ export default (props: any) => {
                 }
             }}
         >
-            <ProFormTreeSelect width="xl" name="orgParentId" label="上级机构" tooltip="最上级则不填"
+            <ProFormTreeSelect width="xl" name="orgParentId" label="上级机构" tooltip="作为顶级节点时不选择"
                                fieldProps={{
                                    //默认展开
                                    treeDefaultExpandAll: true,
