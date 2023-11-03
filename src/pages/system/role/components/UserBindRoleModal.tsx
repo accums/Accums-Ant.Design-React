@@ -4,6 +4,7 @@ import {ModalForm, ProFormCheckbox} from "@ant-design/pro-components";
 import {getSysRoleList} from "@/pages/system/role/api/RoleApi";
 import {CheckboxValueType} from "antd/lib/checkbox/Group";
 import {getSysUserBindRolesByUserId, userBindRoles} from "@/pages/system/role/api/RoleUserApi";
+import {SkinOutlined } from '@ant-design/icons';
 
 
 export default (props: { actionRef: any, userId: any }) => {
@@ -25,8 +26,8 @@ export default (props: { actionRef: any, userId: any }) => {
     return (
         <ModalForm
             width={400}
-            title={"分配角色"}
-            trigger={<Button onClick={showModal} type="primary" size={"small"}
+            title={"为用户配置角色"}
+            trigger={<Button icon={<SkinOutlined />} ghost onClick={showModal} type="primary" size={"small"}
                              style={{marginRight: '10px'}}>配置角色</Button>}
             modalProps={{
                 destroyOnClose: true,

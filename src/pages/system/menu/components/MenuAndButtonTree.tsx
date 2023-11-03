@@ -1,9 +1,10 @@
-import {message, Tree, TreeProps} from "antd";
+import {Button, message, Tree, TreeProps} from "antd";
 import React, {useState} from 'react';
 import {getSysMenuAndButtonList} from "@/pages/system/menu/api/MenuApi";
 import {DrawerForm} from "@ant-design/pro-components";
 import {Icon} from "@/pages/system/icon/api/Icon";
 import {roleBindMenus, getSysRoleBindMenusByRoleId} from "../../role/api/RoleMenuApi";
+import {EditOutlined} from "@ant-design/icons";
 
 export function iconFormat(result: any) {
     if (result) {
@@ -30,7 +31,7 @@ export default (param: { role: any }) => {
 
     return (
         <DrawerForm<any>
-            title={"【" + param.role.roleName + "】"}
+            title={"为角色【" + param.role.roleName + "】配置菜单"}
             drawerProps={{
                 closeIcon: false,
                 destroyOnClose: true
@@ -54,7 +55,8 @@ export default (param: { role: any }) => {
                     return false
                 }
             }}
-            trigger={<a>分配菜单</a>}>
+            trigger={<Button ghost size={"small"} style={{marginRight: '10px'}} type="primary"
+                             icon={<EditOutlined/>}>配置菜单</Button>}>
             <Tree
                 key={"MenuAndButtonTree"}
                 showIcon

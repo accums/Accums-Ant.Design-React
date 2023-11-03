@@ -1,7 +1,7 @@
 import {ActionType} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
 import React, {useEffect, useState} from 'react';
-import {Spin, Switch, Table, Tag} from 'antd';
+import {Spin, Switch, Tag} from 'antd';
 import AddUserModalForm from "@/pages/system/user/components/AddUserModalForm";
 import {getSysUserListPage, updateSysUserStatus} from "@/pages/system/user/api/UserApi";
 import EditUserModalForm from '@/pages/system/user/components/EditUserModalForm';
@@ -14,6 +14,7 @@ export default (props: { orgId: any }) => {
   const actionRef = React.useRef<ActionType>();
   const [spinning, setSpinning] = useState<boolean | undefined>(false);
   const [tableListDataSource, setTableListDataSource] = useState<any>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
   useEffect(() => {
     if (props.orgId) {
       SysUserList().then()
@@ -48,6 +49,14 @@ export default (props: { orgId: any }) => {
             {
               title: '姓名',
               dataIndex: 'nickName',
+              width: 100,
+              align: "center"
+            },
+            {
+              title: '头像',
+              dataIndex: 'avatar',
+              valueType: "image",
+              hideInSearch: true,
               width: 100,
               align: "center"
             },
@@ -145,18 +154,42 @@ export default (props: { orgId: any }) => {
           ]}
         rowSelection={{
           type: "radio",
-          selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+          selectedRowKeys: selectedRowKeys,
+          onChange: function (selectedRowKeys, selectedRows) {
+            if (selectedRows[0].userId) {
+              setSelectedRowKeys(selectedRowKeys)
+              return;
+            }
+          },
         }}
-        tableAlertRender={({selectedRowKeys, onCleanSelected}) => {
+        // onRow={(record) => {
+        //   return {
+        //     onClick: () => {
+        //       if (selectedRowKeys.includes(record.userId)) {
+        //         setSelectedRowKeys([])
+        //       } else {
+        //         setSelectedRowKeys([record.userId])
+        //       }
+        //     },
+        //   };
+        // }}
+        tableAlertRender={({}) => {
           if (selectedRowKeys.length === 1) {
             return [
               <EditUserModalForm actionRef={actionRef} userId={selectedRowKeys[0]} key={"EditUserModalForm"}/>,
               <UserBindRoleModal actionRef={actionRef} userId={selectedRowKeys[0]} key={"UserBindRoleModal"}/>,
-              <DelUserPopConfirm actionRef={actionRef} userId={selectedRowKeys[0]} key={"DelUserPopConfirm"}
-                                 onCleanSelected={onCleanSelected}/>,
             ]
           }
-          return false
+          return []
+        }}
+        tableAlertOptionRender={() => {
+          if (selectedRowKeys.length === 1) {
+            return [
+              <DelUserPopConfirm actionRef={actionRef} userId={selectedRowKeys[0]} key={"DelUserPopConfirm"}
+                                 setSelectedRowKeys={setSelectedRowKeys}/>,
+            ]
+          }
+          return []
         }}
         actionRef={actionRef}
         request={async (params) => {

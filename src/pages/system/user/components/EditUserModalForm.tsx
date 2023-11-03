@@ -22,9 +22,9 @@ export default (props: { actionRef: any, userId: any }) => {
                 wrapperCol: {span: 14},
             }}
             layout={"horizontal"}
-            title="编辑用户"
-            trigger={<Button type="primary" style={{marginRight: '10px'}} size={"small"}
-                             icon={<EditOutlined/>}>编辑</Button>}
+            title="更新用户信息"
+            trigger={<Button ghost type="primary" style={{marginRight: '10px'}} size={"small"}
+                             icon={<EditOutlined/>}>更新</Button>}
             autoFocusFirstInput
             modalProps={{
                 destroyOnClose: true,
@@ -37,11 +37,11 @@ export default (props: { actionRef: any, userId: any }) => {
             onFinish={async (values) => {
                 let newVar = await editSysUser(values);
                 if (newVar.data) {
-                    message.success('编辑用户成功');
+                    message.success('更新用户信息成功');
                     props.actionRef.current?.reload()
                     return true;
                 } else {
-                    message.error('编辑用户失败，请重试');
+                    message.error('更新用户信息失败，请重试');
                     return false;
                 }
             }}

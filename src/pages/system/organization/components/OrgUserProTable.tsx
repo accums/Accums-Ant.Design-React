@@ -57,11 +57,11 @@ export default (props: any) => {
         actions: [
           <AddOrgModalForm key={"AddOrgModalForm-1"} trigger={""} actionRef={actionRef}/>,
           <EditOrgModalForm key={"EditOrgModalForm-1"}
-                            trigger={<Button disabled={props.orgId === '0'} type="primary"
+                            trigger={<Button ghost disabled={props.orgId === '0'} type="primary"
                                              icon={<EditOutlined/>}></Button>}
                             actionRef={actionRef} orgId={props.orgId}/>,
           <DelOrgPopConfirm key={"DelOrgPopConfirm-1"}
-            trigger={<Button disabled={props.orgId === '0'} type="primary" danger icon={<DeleteOutlined/>}></Button>}
+            trigger={<Button ghost disabled={props.orgId === '0'} type="primary" danger icon={<DeleteOutlined/>}></Button>}
             actionRef={actionRef} setSelectedRowKeys={""}
             orgId={props.orgId}/>,
         ],

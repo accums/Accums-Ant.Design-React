@@ -4,10 +4,11 @@ import {
     ProFormText,
     ProFormTextArea,
 } from '@ant-design/pro-components';
-import {message, Tag} from 'antd';
+import {Button, message, Tag} from 'antd';
 import React from "react";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import {editSysRole, getSysRoleByRoleId} from "@/pages/system/role/api/RoleApi";
+import {EditOutlined} from "@ant-design/icons";
 
 export default (props: { actionRef: any, roleId: any }) => {
     return (
@@ -18,9 +19,8 @@ export default (props: { actionRef: any, roleId: any }) => {
             }}
             layout={"horizontal"}
             title="编辑角色"
-            trigger={
-                <a>编辑</a>
-            }
+            trigger={<Button ghost size={"small"} style={{marginRight: '10px'}} type="primary"
+                             icon={<EditOutlined/>}>更新</Button>}
             autoFocusFirstInput
             modalProps={{
                 destroyOnClose: true,
