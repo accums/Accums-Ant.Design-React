@@ -64,7 +64,7 @@ export default () => {
                                 <Switch
                                     size={"small"}
                                     key={`${record.createTime}`}
-                                    checked={record.status == "0"}
+                                    checked={record.status === "0"}
                                     onChange={async (value) => {
                                         if (value) {
                                             record.status = 0
@@ -116,7 +116,7 @@ export default () => {
             expandable={{
                 defaultExpandAllRows: true,
             }}
-            toolBarRender={() => [<AddMenuDrawerForm actionRef={actionRef}/>,]}
+            toolBarRender={() => [<AddMenuDrawerForm key={"AddMenuDrawerForm"} actionRef={actionRef}/>,]}
         />
     );
 };

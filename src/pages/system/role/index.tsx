@@ -8,6 +8,7 @@ import EditRoleModalForm from './components/EditRoleModalForm';
 import DelRolePopConfirm from './components/DelRolePopConfirm';
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import MenuAndButtonTree from '../menu/components/MenuAndButtonTree';
+import MenuAndButtonTable from "@/pages/system/menu/components/MenuAndButtonTable";
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
@@ -123,7 +124,8 @@ export default () => {
         if (selectedRowKeys.length === 1) {
           return [
             <EditRoleModalForm key={"EditRoleModalForm"} actionRef={actionRef} roleId={selectedRowKeys[0]}/>,
-            <MenuAndButtonTree key={"MenuAndButtonTree"} role={selectedRows[0]}/>
+            <MenuAndButtonTree key={"MenuAndButtonTree"}  role={selectedRows[0]}/>,
+            <MenuAndButtonTable key={"MenuAndButtonTree"} actionRef={actionRef} role={selectedRows[0]}/>
           ]
         }
         return []
