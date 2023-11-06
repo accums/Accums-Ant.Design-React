@@ -106,7 +106,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
       ]
       : [],
     menu: {
-      locale:false,
+      locale: false,
       // 每当 initialState?.currentUser?.userid 发生修改时重新执行 request
       params: {
         userId: initialState?.currentUser?.userid,
@@ -114,7 +114,6 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
       request: async () => {
         // request: async (params, defaultMenuData)
         const menuData = await getSysUserRoleMenuAntDesignTreeByToken();
-
         //;return menuData.data;
         //修复菜单图标  因为数据库存储的是UserOutlined  这里需要把Outlined去掉 只保留User
         return fixMenuItemIcon(menuData.data);
@@ -124,11 +123,13 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
       if (menuItemProps.isUrl || !menuItemProps.path) {
         return defaultDom;
       }
+      // 支持二级菜单显示icon
       return (
-        <Link to={menuItemProps.path} >
-          {menuItemProps.pro_layout_parentKeys && menuItemProps.pro_layout_parentKeys.length > 0 && menuItemProps.icon} {menuItemProps.name}
+        <Link to={menuItemProps.path}>
+          {/*{menuItemProps.pro_layout_parentKeys && menuItemProps.pro_layout_parentKeys.length > 0 && menuItemProps.icon} {menuItemProps.name}*/}
+          {menuItemProps.icon} {menuItemProps.name}
         </Link>
-      )
+      );
     },
     menuHeaderRender: undefined,
     // 自定义 403 页面

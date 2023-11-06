@@ -1,5 +1,5 @@
 import {ModalForm, ProTable} from '@ant-design/pro-components';
-import {Button, Table, Tag} from "antd";
+import {Button, Tag} from "antd";
 import React, {useState} from 'react';
 import {getSysMenuAndButtonList} from "@/pages/system/menu/api/MenuApi";
 import {MenuOutlined} from "@ant-design/icons";
@@ -37,11 +37,6 @@ export default (param: { role: any, actionRef: any }) => {
         pagination={false}
         rowSelection={{
           selectedRowKeys: selectedRow,
-          selections: [
-            Table.SELECTION_ALL,
-            Table.SELECTION_INVERT,
-            Table.SELECTION_NONE,
-          ],
           onChange: (record, selected) => {
             for (let item of selected) {
               if (!record.includes(item.menuId)) {

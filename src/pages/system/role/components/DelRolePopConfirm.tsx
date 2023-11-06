@@ -1,13 +1,14 @@
-import {message, Space} from 'antd';
+import {Button, message, Space} from 'antd';
 import React from "react";
 import PopConfirm from "antd/es/popconfirm";
 import {deleteSysRole} from "@/pages/system/role/api/RoleApi";
+import {DeleteOutlined} from "@ant-design/icons";
 
 export default (props: { actionRef: any, roleId: (string | number)}) => {
     return (
         <Space size={16}>
             <PopConfirm
-                title="是否删除所选角色？其分配的菜单数据将一并删除且不可恢复"
+                title="是否删除所选角色及配置的菜单数据？删除后不可恢复，请谨慎操作"
                 okText="是"
                 cancelText="否"
                 placement='right'
@@ -24,7 +25,8 @@ export default (props: { actionRef: any, roleId: (string | number)}) => {
                     }
                 }
             >
-                <a>删除</a>
+              {<Button ghost danger type="primary" style={{marginRight: '10px'}}
+                               size={"small"} icon={<DeleteOutlined/>}>删除</Button>}
             </PopConfirm>
         </Space>
     );
