@@ -160,6 +160,11 @@ export default [
     component: './detection/parameter',
   },
   {
+    name: '试验检测参数',
+    path: '/detection/traffic/entrust',
+    component: './detection/entrust',
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
