@@ -1,97 +1,96 @@
 import {ActionType, PageContainer, ProTable} from '@ant-design/pro-components';
 import React from 'react';
-import {Space, Tag} from "antd";
-import {getDetectionCategorizeList} from "@/pages/detection/categorize/api/Categorize";
+import {Tag} from "antd";
 import AddEntrustContractModalForm from './components/AddEntrustContractModalForm';
 import {getDetectionEntrustContractListPage} from "@/pages/detection/entrust/api/EntrustContractApi";
+import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
   return (
     <PageContainer>
       <ProTable<any>
-        form={{
-          ignoreRules: false,
-        }}
         columns={[
           {
-            title: '主键',
+            title: '序号',
             dataIndex: 'entrustContractId',
             valueType: "indexBorder",
             width: 50,
           },
+
+          {
+            title: '检测分类',
+            dataIndex: 'detectionType',
+            valueType: "select",
+            width: 120,
+            request: async () => {
+              const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "detectionType"});
+              newVar.data.forEach((item: any) => {
+                item.label = <Tag color={item.antDesignTagColor}> {item.label} </Tag>
+              })
+              return newVar.data
+            }
+          },
           {
             title: '委托合同编号',
             dataIndex: 'entrustCode',
-            width: 100,
-          },
-          {
-            title: '所属检测分类',
-            dataIndex: 'categorizeParent',
-            valueType: "select",
-            hideInTable: true,
-            width: 100,
-            fieldProps: {
-              showSearch: true
-            },
-            formItemProps: {
-              rules: [{
-                required: true,
-                message: '请选择检测分类',
-              },],
-            },
-            request: async () => {
-              const newVar = await getDetectionCategorizeList({});
-              return newVar.data;
-            }
-          },
-          {
-            title: '所属检测分类',
-            dataIndex: 'categorizeParent',
-            hideInSearch: true,
+            ellipsis: true,
+            copyable: true,
             width: 150,
-            render: (dom) => {
-              if (dom === null || dom === undefined) {
-                return (<>-</>)
-              }
-              return (
-                <Space>
-                  <Tag color={"blue"} key={dom.toString()}>
-                    {dom.toString()}
-                  </Tag>
-                </Space>
-              )
-            }
           },
           {
-            title: '检测参数代码',
-            dataIndex: 'parameterCode',
-            width: 100,
-          }
-          ,
+            title: '检测单位',
+            dataIndex: 'detectionUnit',
+            ellipsis: true,
+            width: 150,
+          },
           {
-            title: '检测参数名称',
-            dataIndex: 'parameterName',
-            width: 200,
+            title: '委托单位',
+            dataIndex: 'entrustUnit',
+            width: 150,
             ellipsis: true
-          }
-          ,
+          },
           {
-            title: '排序',
-            dataIndex: 'parameterSort',
+            title: '委托人',
+            dataIndex: 'entrustClient',
+            width: 80,
+            ellipsis: true
+          },
+          {
+            title: '委托人手机号',
+            dataIndex: 'entrustClientPhone',
+            width: 100,
+            ellipsis: true
+          },
+
+          {
+            title: '报告要求时间',
+            dataIndex: 'reportRequiredTime',
             hideInSearch: true,
             width: 100,
-            sorter: (a, b) => a.menuSort - b.menuSort,
-          }
-          ,
+            ellipsis: true
+          },
+          {
+            title: '报告交付方式',
+            dataIndex: 'reportDeliverWay',
+            hideInSearch: true,
+            width: 100,
+            valueType: "select",
+            request: async () => {
+              const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "reportDeliverWay"});
+              newVar.data.forEach((item: any) => {
+                item.label = <Tag color={item.antDesignTagColor}> {item.label} </Tag>
+              })
+              return newVar.data
+            }
+          },
           {
             title: '备注',
             dataIndex: 'remark',
             hideInSearch: true,
-            width: 200,
+            width: 100,
             ellipsis: true,
-          }
-          ,
+          },
         ]}
         actionRef={actionRef}
         request={

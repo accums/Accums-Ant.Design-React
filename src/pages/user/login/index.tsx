@@ -7,14 +7,9 @@ import {
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCaptcha,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
+import {LoginForm, ProFormCaptcha, ProFormCheckbox, ProFormText,} from '@ant-design/pro-components';
 import {useEmotionCss} from '@ant-design/use-emotion-css';
-import {FormattedMessage, history, SelectLang, useIntl, useModel, Helmet} from '@umijs/max';
+import {FormattedMessage, Helmet, history, SelectLang, useIntl, useModel} from '@umijs/max';
 import {Alert, message, Tabs} from 'antd';
 import Settings from '../../../../config/defaultSettings';
 import React, {useState} from 'react';
@@ -124,6 +119,7 @@ const Login: React.FC = () => {
         });
         localStorage.setItem('Token', msg.data.jwtToken);
         localStorage.setItem('dataSourcePoolName', msg.data.dataSourceName === null ? "master" : msg.data.dataSourceName);
+        localStorage.setItem('tenantName', msg.data.tokenPayLoad.tenantName === null ? "苏交科检测研究院" : msg.data.tokenPayLoad.tenantName);
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
