@@ -1,10 +1,5 @@
 import {EditOutlined} from '@ant-design/icons';
-import {
-    ModalForm,
-    ProForm,
-    ProFormSelect,
-    ProFormText,
-} from '@ant-design/pro-components';
+import {ModalForm, ProForm, ProFormSelect, ProFormText,} from '@ant-design/pro-components';
 import {Alert, Button, message, Tag} from 'antd';
 import React from 'react';
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
@@ -20,7 +15,7 @@ export default (props: { actionRef: any, menuId: any, buttonId: any }) => {
         <ModalForm<any>
             title="编辑菜单按钮"
             trigger={
-                <Button type="primary" icon={<EditOutlined/>}></Button>
+                <Button ghost type="primary" icon={<EditOutlined/>}></Button>
             }
             modalProps={{
                 destroyOnClose: true,

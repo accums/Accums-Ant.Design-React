@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {getSysMenuAndButtonList} from "@/pages/system/menu/api/MenuApi";
 import {DrawerForm} from "@ant-design/pro-components";
 import {Icon} from "@/pages/system/icon/api/Icon";
-import {roleBindMenus, getSysRoleBindMenusByRoleId} from "../../role/api/RoleMenuApi";
+import {getSysRoleBindMenusByRoleId, roleBindMenus} from "../../role/api/RoleMenuApi";
 import {MenuOutlined} from "@ant-design/icons";
 
 /**
@@ -82,15 +82,12 @@ export default (param: { role: any }) => {
       <Tree
         treeData={treeData}
         key={"MenuAndButtonTree"}
-
         showIcon
         checkStrictly={true}
         defaultExpandAll
-        checkedKeys={defaultCheckedKeyList}
         //如果使用了此属性 则组件在第二次渲染的时候才会显示对应的值
-        //defaultCheckedKeys={defaultCheckedKeyList}
-        defaultExpandParent
-        checkable
+        defaultCheckedKeys={defaultCheckedKeyList}
+        checkable={true}
         onCheck={onCheck}
       />
       <br/>

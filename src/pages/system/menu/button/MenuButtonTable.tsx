@@ -44,7 +44,7 @@ export default (param: { record: any }) => {
             title: '按钮调用接口',
             dataIndex: 'buttonUrl',
             hideInSearch: true,
-            width: 100,
+            width: 200,
             ellipsis: true,
             copyable: true,
             align: "center"
@@ -120,7 +120,8 @@ export default (param: { record: any }) => {
         toolBarRender={() => {
           return [
             <AddMenuButtonForm key={"AddMenuButtonForm"} menuId={param.record.menuId} actionRef={actionRef}/>,
-            <EditMenuButtonForm key={"EditMenuButtonForm"} buttonId={buttonId} menuId={param.record.menuId} actionRef={actionRef}/>,
+            <EditMenuButtonForm key={"EditMenuButtonForm"} buttonId={buttonId} menuId={param.record.menuId}
+                                actionRef={actionRef}/>,
             <DeleteMenuButtonPopConfirm key={"DeleteMenuButtonPopConfirm"} buttonId={buttonId} actionRef={actionRef}/>,
           ]
         }}

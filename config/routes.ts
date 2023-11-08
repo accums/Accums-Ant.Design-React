@@ -143,6 +143,22 @@ export default [
     path: '/task',
     component: './workflow/task',
   },
+
+  {
+    name: '试验检测',
+    path: '/detection',
+    component: './detection/categorize',
+  },
+  {
+    name: '试验检测分类',
+    path: '/detection/traffic/categorize',
+    component: './detection/categorize',
+  },
+  {
+    name: '试验检测参数',
+    path: '/detection/traffic/parameter',
+    component: './detection/parameter',
+  },
   {
     path: '/',
     redirect: '/welcome',

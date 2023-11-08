@@ -1,5 +1,4 @@
-import {ActionType, PageContainer} from '@ant-design/pro-components';
-import {ProTable} from '@ant-design/pro-components';
+import {ActionType, PageContainer, ProTable} from '@ant-design/pro-components';
 import {Switch,} from 'antd';
 import React, {useState} from 'react';
 import AddMenuDrawerForm from "@/pages/system/menu/components/AddMenuDrawerForm";
@@ -8,8 +7,9 @@ import {Icon} from '../icon/api/Icon';
 import MenuButtonTable from './button/MenuButtonTable';
 
 export default () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
   const actionRef = React.useRef<ActionType>();
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
+  const [selectedRow, setSelectedRow] = useState<any>([]);
   return (
     <PageContainer>
       <ProTable<any>
@@ -17,7 +17,7 @@ export default () => {
           {
             title: '菜单名称',
             dataIndex: 'menuName',
-            width: 100,
+            width: 200,
           },
           {
             title: '菜单图标',
@@ -40,7 +40,7 @@ export default () => {
             title: '路由地址',
             dataIndex: 'antdRouter',
             hideInSearch: true,
-            width: 100,
+            width: 200,
           },
           {
             title: '排序',
@@ -89,29 +89,31 @@ export default () => {
         rowSelection={{
           type: "radio",
           selectedRowKeys: selectedRowKeys,
-          onChange: function (selectedRowKeys, selectedRows) {
-            if (selectedRows[0].menuId) {
-              setSelectedRowKeys(selectedRowKeys)
-              return;
-            }
-          },
         }}
         onRow={(record) => {
           return {
             onClick: () => {
               if (selectedRowKeys.includes(record.menuId)) {
                 setSelectedRowKeys([])
+                setSelectedRow([])
               } else {
                 setSelectedRowKeys([record.menuId])
+                setSelectedRow([record])
               }
             },
           };
         }}
-        tableAlertRender={({selectedRowKeys,selectedRows}) => {
+        tableAlertRender={({}) => {
           if (selectedRowKeys.length === 1) {
             return [
-              <MenuButtonTable key={"MenuButtonTable"} record={selectedRows[0]}/>
+              <MenuButtonTable key={"MenuButtonTable"} record={selectedRow[0]}/>
             ]
+          }
+          return []
+        }}
+        tableAlertOptionRender={() => {
+          if (selectedRowKeys.length === 1) {
+            return []
           }
           return []
         }}
@@ -130,7 +132,9 @@ export default () => {
         expandable={{
           defaultExpandAllRows: true,
         }}
-        toolBarRender={() => [<AddMenuDrawerForm key={"AddMenuDrawerForm"} actionRef={actionRef}/>,]}
+        toolBarRender={() => [
+          <AddMenuDrawerForm key={"AddMenuDrawerForm"} actionRef={actionRef}/>,
+        ]}
       />
     </PageContainer>
   );

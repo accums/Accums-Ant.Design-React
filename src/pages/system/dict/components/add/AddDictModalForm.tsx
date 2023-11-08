@@ -1,10 +1,6 @@
-import {
-    ModalForm, ProFormDigit, ProFormSelect,
-    ProFormText,
-    ProFormTextArea,
-} from '@ant-design/pro-components';
+import {ModalForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea,} from '@ant-design/pro-components';
 import {Button, message, Tag} from 'antd';
-import React, {} from "react";
+import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
 import {addSysDict, getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 
@@ -14,18 +10,18 @@ const AddDictModalForm: React.FC<any> = ({actionRef, dictTypeId}) => {
     }
     return (
         <ModalForm<any>
-            {...{
+          {...{
                 labelCol: {span: 5},
                 wrapperCol: {span: 14},
             }}
-            layout={"horizontal"}
-            title="新增字典"
-            trigger={<Button type="primary" icon={<PlusOutlined/>}></Button>}
-            autoFocusFirstInput
-            modalProps={{
+          layout={"horizontal"}
+          title="新增字典"
+          trigger={<Button type="primary" icon={<PlusOutlined/>}></Button>}
+          autoFocusFirstInput
+          modalProps={{
                 destroyOnClose: true,
             }}
-            onFinish={async (values) => {
+          onFinish={async (values) => {
                 values.dictParentId = dictTypeId;
                 let newVar = await addSysDict(values);
                 if (newVar.data) {

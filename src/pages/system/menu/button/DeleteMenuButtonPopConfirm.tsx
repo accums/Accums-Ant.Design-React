@@ -29,7 +29,7 @@ export default (props: { actionRef: any, buttonId: any }) => {
                     }
                 }
             >
-                <Button type="primary" danger icon={<DeleteOutlined/>}></Button>
+                <Button ghost type="primary" danger icon={<DeleteOutlined/>}></Button>
             </PopConfirm>
         </Space>
     );

@@ -1,9 +1,4 @@
-import {
-    ModalForm,
-    ProFormDigit,
-    ProFormSelect,
-    ProFormText, ProFormTextArea,
-} from '@ant-design/pro-components';
+import {ModalForm, ProFormDigit, ProFormSelect, ProFormText, ProFormTextArea,} from '@ant-design/pro-components';
 import {Button, message, Tag} from 'antd';
 import React from "react";
 import {getSysDictTypeById, updateSysDictType} from '../../api/DictTypeApi';
@@ -14,23 +9,23 @@ import {EditOutlined} from "@ant-design/icons";
 const EditDictType: React.FC<any> = ({actionRef, dictTypeId}) => {
     return (
         <ModalForm
-            {...{
+          {...{
                 labelCol: {span: 5},
                 wrapperCol: {span: 14},
             }}
-            key={"EditDictType"}
-            layout={"horizontal"}
-            title="编辑字典类型"
-            trigger={<Button type="primary" icon={<EditOutlined/>}></Button>}
-            params={{dictTypeId: dictTypeId}}
-            request={async (params) => {
+          key={"EditDictType"}
+          layout={"horizontal"}
+          title="编辑字典类型"
+          trigger={<Button ghost type="primary" icon={<EditOutlined/>}></Button>}
+          params={{dictTypeId: dictTypeId}}
+          request={async (params) => {
                 const newVar = await getSysDictTypeById(params);
                 return newVar.data;
             }}
-            modalProps={{
+          modalProps={{
                 destroyOnClose: true,
             }}
-            onFinish={async (values) => {
+          onFinish={async (values) => {
                 const newVar = await updateSysDictType(values);
                 if (newVar.data) {
                     message.success('新增成功');
