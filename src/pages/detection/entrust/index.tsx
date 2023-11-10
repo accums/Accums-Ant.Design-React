@@ -1,12 +1,15 @@
 import {ActionType, PageContainer, ProTable} from '@ant-design/pro-components';
-import React from 'react';
+import React, {useState} from 'react';
 import {Tag} from "antd";
 import AddEntrustContractModalForm from './components/AddEntrustContractModalForm';
 import {getDetectionEntrustContractListPage} from "@/pages/detection/entrust/api/EntrustContractApi";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
+import DetailEntrustContractDrawerForm from './components/DetailEntrustContractDrawerForm';
+import AddEntrustSampleModalForm from './components/AddEntrustSampleModalForm';
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
   return (
     <PageContainer>
       <ProTable<any>
@@ -35,8 +38,10 @@ export default () => {
             title: '委托合同编号',
             dataIndex: 'entrustCode',
             ellipsis: true,
-            copyable: true,
             width: 150,
+            render: (dom, entity) => {
+              return <DetailEntrustContractDrawerForm entity={entity}/>
+            },
           },
           {
             title: '检测单位',
@@ -85,6 +90,13 @@ export default () => {
             }
           },
           {
+            title: '创建时间',
+            dataIndex: 'createTime',
+            hideInSearch: true,
+            width: 100,
+            ellipsis: true,
+          },
+          {
             title: '备注',
             dataIndex: 'remark',
             hideInSearch: true,
@@ -92,6 +104,42 @@ export default () => {
             ellipsis: true,
           },
         ]}
+        rowSelection={{
+          type: "radio",
+          selectedRowKeys: selectedRowKeys,
+          onChange: function (selectedRowKeys, selectedRows) {
+            if (selectedRows[0].entrustContractId) {
+              setSelectedRowKeys(selectedRowKeys)
+              return;
+            }
+          },
+        }}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              if (selectedRowKeys.includes(record.entrustContractId)) {
+                setSelectedRowKeys([])
+              } else {
+                setSelectedRowKeys([record.entrustContractId])
+              }
+            },
+          };
+        }}
+        tableAlertRender={({selectedRows}) => {
+          if (selectedRowKeys.length === 1) {
+            return [
+              <AddEntrustSampleModalForm selectedRows={selectedRows[0]} key={"AddEntrustSampleModalForm"}
+                                         actionRef={actionRef}/>,
+            ]
+          }
+          return []
+        }}
+        tableAlertOptionRender={() => {
+          if (selectedRowKeys.length === 1) {
+            return []
+          }
+          return []
+        }}
         actionRef={actionRef}
         request={
           async (params) => {
@@ -103,11 +151,7 @@ export default () => {
             };
           }
         }
-        search={
-          {
-            labelWidth: "auto"
-          }
-        }
+        search={{labelWidth: "auto"}}
         rowKey={
           (record) => record.entrustContractId
         }

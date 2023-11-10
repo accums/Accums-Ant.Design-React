@@ -149,21 +149,48 @@ export default [
     path: '/detection',
     component: './detection/categorize',
   },
+
+
+  //仪器设备
+  {
+    name: '仪器设备',
+    path: '/detection/device',
+    component: './detection/device',
+  },
+
+  {
+    name: '设备管理',
+    path: '/detection/device/management',
+    component: './detection/device',
+  },
+
+  //标准规范
+
   {
     name: '试验检测分类',
-    path: '/detection/traffic/categorize',
+    path: '/detection/specification/categorize',
     component: './detection/categorize',
   },
   {
     name: '试验检测参数',
-    path: '/detection/traffic/parameter',
+    path: '/detection/specification/parameter',
     component: './detection/parameter',
   },
+
+  //委托登记
   {
-    name: '试验检测参数',
-    path: '/detection/traffic/entrust',
+    name: '委托合同',
+    path: '/detection/registration/entrust',
     component: './detection/entrust',
   },
+
+  //样品管理
+  {
+    name: '样品管理',
+    path: '/detection/sample/management',
+    component: './detection/sample',
+  },
+
   {
     path: '/',
     redirect: '/welcome',

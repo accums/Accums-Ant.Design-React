@@ -11,6 +11,15 @@ export async function addDetectionParameter(params: any, options?: { [key: strin
 }
 
 
+export async function getDetectionParameterList(params: any, options?: { [key: string]: any }) {
+  return request<any>('/api/detection/parameter/getDetectionParameterList',
+    {
+      method: 'POST',
+      data: params,
+      ...(options || {}),
+    });
+}
+
 export async function getDetectionParameterListPage(params: any, options?: { [key: string]: any }) {
   return request<any>('/api/detection/parameter/getDetectionParameterListPage',
     {

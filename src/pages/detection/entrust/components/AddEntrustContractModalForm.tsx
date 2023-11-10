@@ -57,7 +57,7 @@ export default (props: { actionRef: React.MutableRefObject<ActionType | undefine
       </ProForm.Group>
 
       <Divider></Divider>
-      <ProForm.Group title={"委托合同信息"}>
+      <ProForm.Group title={"委托信息"}>
         <ProFormText width="md" name="entrustClient" label="委托人" rules={[{required: true}]}/>
         <ProFormText width="md" name="entrustClientPhone" label="委托人手机号" rules={[{required: true}]}/>
         <ProFormText width="md" name="entrustUnit" label="委托单位" rules={[{required: true}]}/>
