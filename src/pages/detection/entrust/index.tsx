@@ -1,11 +1,13 @@
 import {ActionType, PageContainer, ProTable} from '@ant-design/pro-components';
 import React, {useState} from 'react';
-import {Tag} from "antd";
+import {Alert, Tag} from "antd";
 import AddEntrustContractModalForm from './components/AddEntrustContractModalForm';
 import {getDetectionEntrustContractListPage} from "@/pages/detection/entrust/api/EntrustContractApi";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import DetailEntrustContractDrawerForm from './components/DetailEntrustContractDrawerForm';
 import AddEntrustSampleModalForm from './components/AddEntrustSampleModalForm';
+import EditEntrustContractModalForm from './components/EditEntrustContractModalForm';
+import SubmitEntrustContractModalForm from './components/SubmitEntrustContractModalForm';
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
@@ -13,6 +15,8 @@ export default () => {
   return (
     <PageContainer>
       <ProTable<any>
+        headerTitle={<Alert showIcon
+                            message={"仅【待提交】状态下的委托合同数据支持【配置样品】和【更新】，提交后的委托合同数据不可二次提交。"}></Alert>}
         columns={[
           {
             title: '序号',
@@ -67,7 +71,6 @@ export default () => {
             width: 100,
             ellipsis: true
           },
-
           {
             title: '报告要求时间',
             dataIndex: 'reportRequiredTime',
@@ -90,17 +93,24 @@ export default () => {
             }
           },
           {
+            title: '委托状态',
+            dataIndex: 'entrustStatus',
+            hideInSearch: true,
+            width: 100,
+            valueType: "select",
+            request: async () => {
+              const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "entrustStatus"});
+              newVar.data.forEach((item: any) => {
+                item.label = <Tag color={item.antDesignTagColor}> {item.label} </Tag>
+              })
+              return newVar.data
+            }
+          },
+          {
             title: '创建时间',
             dataIndex: 'createTime',
             hideInSearch: true,
-            width: 100,
-            ellipsis: true,
-          },
-          {
-            title: '备注',
-            dataIndex: 'remark',
-            hideInSearch: true,
-            width: 100,
+            width: 120,
             ellipsis: true,
           },
         ]}
@@ -130,13 +140,18 @@ export default () => {
             return [
               <AddEntrustSampleModalForm selectedRows={selectedRows[0]} key={"AddEntrustSampleModalForm"}
                                          actionRef={actionRef}/>,
+              <EditEntrustContractModalForm selectedRows={selectedRows[0]} key={"EditEntrustContractModalForm"}
+                                            actionRef={actionRef}/>,
             ]
           }
           return []
         }}
-        tableAlertOptionRender={() => {
+        tableAlertOptionRender={({selectedRows}) => {
           if (selectedRowKeys.length === 1) {
-            return []
+            return [
+              <SubmitEntrustContractModalForm selectedRows={selectedRows[0]} key={"SubmitEntrustContractModalForm"}
+                                              actionRef={actionRef}/>,
+            ]
           }
           return []
         }}

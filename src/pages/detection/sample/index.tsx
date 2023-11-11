@@ -5,7 +5,6 @@ import SampleProTable from './components/SampleProTable';
 export default () => {
   return (
     <PageContainer>
-
       <SampleProTable/>
     </PageContainer>
   )

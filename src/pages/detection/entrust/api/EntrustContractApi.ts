@@ -27,6 +27,15 @@ export async function addDetectionEntrustContract(params: any, options?: { [key:
     });
 }
 
+export async function updateDetectionEntrustContractById(params: any, options?: { [key: string]: any }) {
+  return request<any>('/api/detection/entrust/contract/updateDetectionEntrustContractById',
+    {
+      method: 'POST',
+      data: params,
+      ...(options || {}),
+    });
+}
+
 export async function getDetectionEntrustContractById(params: any, options?: { [key: string]: any }) {
   return request<any>('/api/detection/entrust/contract/getDetectionEntrustContractById',
     {

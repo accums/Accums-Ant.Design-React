@@ -19,7 +19,7 @@ export default (props: { entrustContractId: any }) => {
         {
           title: '样品编号',
           dataIndex: 'sampleCode',
-          width: 100,
+          width: 120,
           ellipsis: true
         },
         {

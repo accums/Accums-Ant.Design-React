@@ -8,7 +8,7 @@ import {getDetectionEntrustContractById} from "@/pages/detection/entrust/api/Ent
 const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
   return (
     <ModalForm
-      width={1200}
+      width={1000}
       trigger={<a>{entity.entrustCode}</a>}
       submitter={false}
       modalProps={{
@@ -29,7 +29,16 @@ const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
                          }
                        }}
       >
-        <ProDescriptions.Item label="委托合同编号" dataIndex="entrustCode" span={2}/>
+        <ProDescriptions.Item label="委托合同编号" dataIndex="entrustCode" span={1}/>
+        <ProDescriptions.Item label="委托状态" dataIndex={"entrustStatus"} span={1}
+                              request={async () => {
+                                const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "entrustStatus"});
+                                newVar.data.forEach((item: any) => {
+                                  item.label = <Tag color={item.antDesignTagColor}> {item.label} </Tag>
+                                })
+                                return newVar.data
+                              }}
+        />
         <ProDescriptions.Item label="检测类别" dataIndex={"detectionType"}
                               request={async () => {
                                 const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "detectionType"});
