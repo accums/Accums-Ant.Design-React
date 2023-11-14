@@ -1,5 +1,5 @@
 import {ActionType, PageContainer, ProTable} from '@ant-design/pro-components';
-import React, {useState} from 'react';
+import React from 'react';
 import {Alert, Tag} from "antd";
 import AddEntrustContractModalForm from './components/AddEntrustContractModalForm';
 import {getDetectionEntrustContractListPage} from "@/pages/detection/entrust/api/EntrustContractApi";
@@ -11,7 +11,6 @@ import SubmitEntrustContractModalForm from './components/SubmitEntrustContractMo
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
-  const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
   return (
     <PageContainer>
       <ProTable<any>
@@ -116,26 +115,8 @@ export default () => {
         ]}
         rowSelection={{
           type: "radio",
-          selectedRowKeys: selectedRowKeys,
-          onChange: function (selectedRowKeys, selectedRows) {
-            if (selectedRows[0].entrustContractId) {
-              setSelectedRowKeys(selectedRowKeys)
-              return;
-            }
-          },
         }}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              if (selectedRowKeys.includes(record.entrustContractId)) {
-                setSelectedRowKeys([])
-              } else {
-                setSelectedRowKeys([record.entrustContractId])
-              }
-            },
-          };
-        }}
-        tableAlertRender={({selectedRows}) => {
+        tableAlertRender={({selectedRowKeys, selectedRows}) => {
           if (selectedRowKeys.length === 1) {
             return [
               <AddEntrustSampleModalForm selectedRows={selectedRows[0]} key={"AddEntrustSampleModalForm"}
@@ -146,7 +127,7 @@ export default () => {
           }
           return []
         }}
-        tableAlertOptionRender={({selectedRows}) => {
+        tableAlertOptionRender={({selectedRowKeys, selectedRows}) => {
           if (selectedRowKeys.length === 1) {
             return [
               <SubmitEntrustContractModalForm selectedRows={selectedRows[0]} key={"SubmitEntrustContractModalForm"}
@@ -177,7 +158,6 @@ export default () => {
         }
       />
     </PageContainer>
-  )
-    ;
+  );
 }
 

@@ -22,3 +22,13 @@ export async function addDetectionSample(params: any, options?: { [key: string]:
       ...(options || {}),
     });
 }
+
+export async function getDetectionSampleById(params: any, options?: { [key: string]: any }) {
+  return request<any>('/api/detection/sample/getDetectionSampleById',
+    {
+      method: 'POST',
+      data: params,
+      ...(options || {}),
+    });
+}
+

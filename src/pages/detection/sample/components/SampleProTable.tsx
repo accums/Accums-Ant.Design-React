@@ -4,6 +4,7 @@ import {getDetectionSampleListPage} from "@/pages/detection/sample/api/SampleApi
 import {Alert, Tag} from "antd";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import DetailEntrustContractDrawerForm from "@/pages/detection/entrust/components/DetailEntrustContractDrawerForm";
+import DetailSampleDrawerForm from './DetailSampleDrawerForm';
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
@@ -34,6 +35,15 @@ export default () => {
           title: '样品编号',
           dataIndex: 'sampleCode',
           width: 150,
+          ellipsis: true,
+          render: (dom, entity) => {
+            return <DetailSampleDrawerForm entity={entity}/>
+          },
+        },
+        {
+          title: '样品分类',
+          dataIndex: 'categorizeId',
+          width: 100,
           ellipsis: true
         },
         {
@@ -105,12 +115,7 @@ export default () => {
           width: 120,
           ellipsis: true
         },
-        {
-          title: '备注',
-          dataIndex: 'remark',
-          width: 150,
-          ellipsis: true
-        },
+
       ]}
       actionRef={actionRef}
       request={

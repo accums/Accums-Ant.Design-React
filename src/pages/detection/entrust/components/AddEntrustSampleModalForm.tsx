@@ -10,6 +10,7 @@ export default (props: { actionRef: any, selectedRows: any }) => {
     <ModalForm
       width={1000}
       trigger={<Button ghost size={"small"} type="primary"
+                       disabled={props.selectedRows.entrustStatus !== "1"}
                        style={{marginRight: '10px'}}><BgColorsOutlined/>配置样品</Button>}
       autoFocusFirstInput
       modalProps={{
@@ -29,7 +30,10 @@ export default (props: { actionRef: any, selectedRows: any }) => {
       }}
     >
       <Alert showIcon
-             message={"委托合同编号【" + props.selectedRows.entrustCode + "】委托单位【" + props.selectedRows.entrustUnit + "】委托人【" + props.selectedRows.entrustClient + "】"}></Alert>
+             message={"委托合同编号【" + props.selectedRows.entrustCode + "】" +
+               "委托单位【" + props.selectedRows.entrustUnit + "】" +
+               "委托人【" + props.selectedRows.entrustClient + "】" +
+               "委托人手机号【" + props.selectedRows.entrustClientPhone + "】"}></Alert>
       <EntrustSampleProTable entrustContractId={props.selectedRows.entrustContractId}/>
     </ModalForm>
   );

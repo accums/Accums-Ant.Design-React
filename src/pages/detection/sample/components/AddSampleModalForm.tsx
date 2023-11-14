@@ -1,5 +1,12 @@
 import {PlusOutlined} from '@ant-design/icons';
-import {ModalForm, ProFormDependency, ProFormSelect, ProFormText, ProFormTextArea,} from '@ant-design/pro-components';
+import {
+  ModalForm,
+  ProFormDependency,
+  ProFormDigit,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+} from '@ant-design/pro-components';
 import {Button, Divider, message, Tag} from 'antd';
 import React from "react";
 import {getDetectionCategorizeList,} from "@/pages/detection/categorize/api/Categorize";
@@ -73,6 +80,19 @@ export default (props: { actionRef: any, entrustContractId: any }) => {
 
       <Divider></Divider>
 
+      <ProFormDigit colProps={{md: 6, xl: 6}} min={"0.1"} max={"99"} name="sampleQuantity" label="样品数量"
+                    rules={[{required: true}]}/>
+      <ProFormSelect colProps={{md: 6, xl: 6}} name="sampleQuantityUnit" label="计量单位" rules={[{required: true}]}
+                     request={async () => {
+                       const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "sampleQuantityUnit"});
+                       newVar.data.forEach((item: any) => {
+                         item.label = <Tag color={item.antDesignTagColor}> {item.label} </Tag>
+                       })
+                       return newVar.data
+                     }}
+      />
+      <Divider></Divider>
+
       <ProFormText colProps={{md: 12, xl: 8}} name="sampleName" label="样品名称" rules={[{required: true}]}/>
       <ProFormSelect colProps={{md: 12, xl: 8}} name="sampleSource" label="样品来源" rules={[{required: true}]}
                      initialValue={"1"}
@@ -96,7 +116,11 @@ export default (props: { actionRef: any, entrustContractId: any }) => {
       />
       <ProFormText colProps={{md: 12, xl: 8}} name="samplePeople" label="收样人" rules={[{required: true}]}/>
       <ProFormText colProps={{md: 12, xl: 8}} name="sampleLocation" label="取样地点"/>
-      <ProFormText colProps={{md: 12, xl: 8}} name="sampleRoom" label="归属样品室"/>
+      <ProFormText colProps={{md: 12, xl: 8}} name="sampleRoom" label="保留归属样品室"/>
+
+      <Divider></Divider>
+
+
       <ProFormTextArea colProps={{md: 12, xl: 12}} name="sampleDescribe" label="样品描述"/>
       <ProFormTextArea colProps={{md: 12, xl: 12}} name="remark" label="备注"/>
 

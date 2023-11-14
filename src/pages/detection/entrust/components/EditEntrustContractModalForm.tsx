@@ -19,7 +19,8 @@ export default (props: { actionRef: any, selectedRows: any }) => {
   return (
     <ModalForm
       title="更新委托合同数据"
-      trigger={<Button ghost size={"small"} type="primary" style={{marginRight: '10px'}}><EditOutlined/>更新</Button>}
+      trigger={<Button disabled={props.selectedRows.entrustStatus !== "1"}
+                       ghost size={"small"} type="primary" style={{marginRight: '10px'}}><EditOutlined/>更新</Button>}
       autoFocusFirstInput
       modalProps={{
         destroyOnClose: true,
@@ -31,11 +32,11 @@ export default (props: { actionRef: any, selectedRows: any }) => {
       onFinish={async (values) => {
         let newVar = await updateDetectionEntrustContractById(values);
         if (newVar.data) {
-          message.success('新建委托合同成功');
+          message.success('更新委托合同数据成功');
           props.actionRef.current?.reload()
           return true;
         } else {
-          message.error('新建委托合同失败，请重试');
+          message.error('更新委托合同数据失败，请重试');
           return false;
         }
       }}

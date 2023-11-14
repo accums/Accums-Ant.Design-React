@@ -3,6 +3,7 @@ import React from 'react';
 import AddCategorizeModalForm from "@/pages/detection/categorize/components/AddCategorizeModalForm";
 import {getDetectionCategorizeListPage} from "@/pages/detection/categorize/api/Categorize";
 import {Space, Tag} from "antd";
+import EditCategorizeModalForm from './components/EditCategorizeModalForm';
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
@@ -20,7 +21,7 @@ export default () => {
             title: '所属检测分类',
             dataIndex: 'categorizeParent',
             hideInSearch: true,
-            width: 200,
+            width: 150,
             render: (dom) => {
               if (dom === null || dom === undefined) {
                 return (<>-</>)
@@ -28,10 +29,8 @@ export default () => {
               if (dom === "-") {
                 return (<>-</>)
               }
-              const strings = dom.toString().split(",");
-              console.log(strings)
               return (
-                <Space>
+                <Space wrap>
                   {dom.toString().split(",").map((item) => (
                     <Tag color={"blue"} key={item}>
                       {item}
@@ -52,13 +51,6 @@ export default () => {
             width: 150,
           },
           {
-            title: '检测分类英文',
-            dataIndex: 'categorizeTranslate',
-            hideInSearch: true,
-            width: 150,
-            ellipsis: true,
-          },
-          {
             title: '排序',
             dataIndex: 'categorizeSort',
             hideInSearch: true,
@@ -73,6 +65,18 @@ export default () => {
             ellipsis: true,
           },
         ]}
+        rowSelection={{
+          type: "radio",
+        }}
+        tableAlertRender={({selectedRowKeys, selectedRows}) => {
+          if (selectedRowKeys.length === 1) {
+            return [
+              <EditCategorizeModalForm selectedRows={selectedRows[0]} key={"EditCategorizeModalForm"}
+                                       actionRef={actionRef}/>,
+            ]
+          }
+          return []
+        }}
         actionRef={actionRef}
         request={
           async (params) => {

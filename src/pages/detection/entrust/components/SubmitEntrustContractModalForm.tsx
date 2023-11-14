@@ -10,7 +10,7 @@ import {
 export default (props: { actionRef: any, selectedRows: any }) => {
   return (
     <ModalForm
-      title="更新委托合同"
+      title="提交委托合同"
       trigger={<Button ghost size={"small"} type="primary"
                        style={{marginRight: '10px'}}><SendOutlined/>提交</Button>}
       autoFocusFirstInput
@@ -35,9 +35,7 @@ export default (props: { actionRef: any, selectedRows: any }) => {
       }}
     >
       <br/>
-      <Alert showIcon message={"数据提交后"}></Alert>
-      <Alert showIcon message={"1. 委托合同数据不能继续配置样品"}></Alert>
-      <Alert showIcon message={"2. 委托合同数据不能继续更新"}></Alert>
+      <Alert showIcon message={"请注意：委托合同数据提交后，将无法二次【提交】，且不可【配置样品】和【更新】数据。"}></Alert>
     </ModalForm>
   );
 };
