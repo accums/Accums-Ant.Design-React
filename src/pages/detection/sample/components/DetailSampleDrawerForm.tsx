@@ -1,8 +1,10 @@
-import {ModalForm, ProDescriptions,} from '@ant-design/pro-components';
+import {ModalForm, ProDescriptions, ProTable,} from '@ant-design/pro-components';
 import React from "react";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import {Tag} from "antd";
 import {getDetectionSampleById} from "@/pages/detection/sample/api/SampleApi";
+import {getDetectionCategorizeList} from "@/pages/detection/categorize/api/Categorize";
+import {getDetectionParameterList} from "@/pages/detection/parameter/api/ParameterApi";
 
 const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
   return (
@@ -14,8 +16,10 @@ const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
       modalProps={{
         closeIcon: false,
         destroyOnClose: true,
+        style: {top: 10}
       }}
     >
+
       <ProDescriptions labelStyle={{fontWeight: "bold", color: 'black'}}
                        layout="vertical"
                        bordered
@@ -29,10 +33,53 @@ const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
                          }
                        }}
       >
-        <ProDescriptions.Item label="委托合同编号" dataIndex="entrustCode" span={3}/>
+        <ProDescriptions.Item label="所选样品参数" dataIndex="sampleParameters" span={3}
+                              render={(dom: any) => {
+                                return (
+                                  <ProTable
+                                    bordered={false}
+                                    size={"small"}
+                                    ghost={true}
+                                    search={false}
+                                    options={false}
+                                    pagination={false}
+                                    dataSource={dom}
+                                    rowKey={(record) => record.sampleParameterId}
+                                    columns={[
+                                      {
+                                        title: '序号',
+                                        dataIndex: 'sampleParameterId',
+                                        valueType: "indexBorder",
+                                        width: 50,
+                                      },
+                                      {
+                                        title: '样品分类',
+                                        dataIndex: 'categorizeId',
+                                        width: 100,
+                                        valueType: "select",
+                                        align: "center",
+                                        request: async () => {
+                                          const newVar = await getDetectionCategorizeList({});
+                                          return newVar.data;
+                                        }
+                                      },
+                                      {
+                                        title: '样品参数',
+                                        dataIndex: 'parameterId',
+                                        width: 100,
+                                        valueType: "select",
+                                        align: "center",
+                                        request: async () => {
+                                          const newVar = await getDetectionParameterList({});
+                                          return newVar.data;
+                                        }
+                                      },
+                                    ]}
+                                  />
+                                );
+                              }}/>
+        <ProDescriptions.Item label="委托合同编号" dataIndex="entrustCode"/>
         <ProDescriptions.Item label="样品编号" dataIndex="sampleCode"/>
-        <ProDescriptions.Item label="样品分类" dataIndex="categorizeId"/>
-
         <ProDescriptions.Item label="样品状态" dataIndex={"sampleStatus"}
                               request={async () => {
                                 const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "sampleStatus"});
@@ -55,7 +102,7 @@ const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
                                 return newVar.data
                               }}
         />
-        <ProDescriptions.Item label="取样人" dataIndex={"samplePeople"}/>
+        <ProDescriptions.Item label="收样人" dataIndex={"samplePeople"}/>
         <ProDescriptions.Item label="样品来源" dataIndex={"sampleSource"}
                               request={async () => {
                                 const newVar = await getSysDictListByDictTypeCode({"dictTypeCode": "sampleSource"});

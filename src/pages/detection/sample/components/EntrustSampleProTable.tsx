@@ -4,6 +4,7 @@ import {getDetectionSampleListPage} from "@/pages/detection/sample/api/SampleApi
 import AddSampleModalForm from "@/pages/detection/sample/components/AddSampleModalForm";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import {Tag} from "antd";
+import DetailSampleDrawerForm from "@/pages/detection/sample/components/DetailSampleDrawerForm";
 
 export default (props: { entrustContractId: any }) => {
   const actionRef = React.useRef<ActionType>();
@@ -19,8 +20,11 @@ export default (props: { entrustContractId: any }) => {
         {
           title: '样品编号',
           dataIndex: 'sampleCode',
-          width: 120,
-          ellipsis: true
+          width: 150,
+          ellipsis: true,
+          render: (dom, entity) => {
+            return <DetailSampleDrawerForm entity={entity}/>
+          },
         },
         {
           title: '样品分类',

@@ -14,6 +14,7 @@ const DetailOpLogDrawerForm: React.FC<any> = ({entity}) => {
       modalProps={{
         closeIcon: false,
         destroyOnClose: true,
+        style: {top: 10}
       }}
     >
       <ProDescriptions labelStyle={{fontWeight: "bold", color: 'black'}}

@@ -60,7 +60,7 @@ export default (props: { actionRef: any, entrustContractId: any }) => {
           if (categorizeId) {
             return (
               <ProFormSelect
-                colProps={{xl: 24}} name="parameterId" label="样品参数"
+                colProps={{xl: 24}} name="parameterIds" label="样品参数"
                 tooltip={"在已创建的试验检测样品参数中选择单个或多个"} rules={[{required: true}]}
                 fieldProps={{
                   mode: 'multiple',

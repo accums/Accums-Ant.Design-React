@@ -5,6 +5,7 @@ import {Alert, Tag} from "antd";
 import {getSysDictListByDictTypeCode} from "@/pages/system/dict/api/DictApi";
 import DetailEntrustContractDrawerForm from "@/pages/detection/entrust/components/DetailEntrustContractDrawerForm";
 import DetailSampleDrawerForm from './DetailSampleDrawerForm';
+import SampleLabelPrinting from './SampleLabelPrinting';
 
 export default () => {
   const actionRef = React.useRef<ActionType>();
@@ -117,6 +118,17 @@ export default () => {
         },
 
       ]}
+      rowSelection={{
+        type: "radio",
+      }}
+      tableAlertRender={({selectedRowKeys, selectedRows}) => {
+        if (selectedRowKeys.length === 1) {
+          return [
+            <SampleLabelPrinting selectedRows={selectedRows[0]} key={"SampleLabelPrinting"} actionRef={actionRef}/>,
+          ]
+        }
+        return []
+      }}
       actionRef={actionRef}
       request={
         async (params) => {
