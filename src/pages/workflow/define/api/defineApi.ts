@@ -21,7 +21,7 @@ const getRequestBodyParams = (params: any) => {
 };
 
 export async function listPage(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/define/listPage',
+  return request<any>('/api/act/re/define/listPage',
     {
       method: 'POST',
       headers: {
@@ -33,7 +33,7 @@ export async function listPage(params: any, options?: { [key: string]: any }) {
 }
 
 export async function updateSuspensionStatus(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/define/updateSuspensionStatus',
+  return request<any>('/api/act/re/define/updateSuspensionStatus',
     {
       method: 'POST',
       headers: {

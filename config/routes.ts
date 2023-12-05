@@ -107,49 +107,56 @@ export default [
     component: './system/file/alibaba/oss',
   },
 
+  // =======================================================================
+  {
+    name: '智能流程系统',
+    path: '/workflow',
+    component: './workflow/model',
+  },
   {
     name: '流程模型',
     icon: 'antDesign',
-    path: '/model',
+    path: '/workflow/model',
     component: './workflow/model',
   },
   {
     name: '流程部署',
     icon: 'deploymentUnit',
-    path: '/deploy',
+    path: '/workflow/deploy',
     component: './workflow/deploy',
   },
   {
     name: '流程定义',
     icon: 'codepen',
-    path: '/define',
+    path: '/workflow/define',
     component: './workflow/define',
   },
   {
     name: '发起流程',
     icon: 'codepen',
-    path: '/start',
+    path: '/workflow/start',
     component: './workflow/start',
   },
   {
     name: '流程实例',
     icon: 'audit',
-    path: '/execution',
+    path: '/workflow/execution',
     component: './workflow/execution',
   },
   {
     name: '流程任务',
     icon: 'exception',
-    path: '/task',
+    path: '/workflow/task',
     component: './workflow/task',
   },
 
+
+  // =======================================================================
   {
     name: '试验检测',
     path: '/detection',
     component: './detection/categorize',
   },
-
 
   //仪器设备
   {
@@ -189,6 +196,35 @@ export default [
     name: '样品管理',
     path: '/detection/sample/management',
     component: './detection/sample',
+  },
+
+
+  //样品管理
+  {
+    name: '试验记录',
+    path: '/detection/prob/records',
+    component: './detection/prob',
+  },
+
+  //=======================智慧挪车=====================================
+  //智慧挪车
+  {
+    name: '智慧挪车',
+    path: '/move/car/',
+    component: './move/car',
+  },
+
+  {
+    name: '智慧挪车',
+    path: '/move/car/contact',
+    component: './move/car',
+  },
+
+  {
+    name: '智慧挪车',
+    layout: false,
+    path: '/move/car/contact/apps',
+    component: './move/car/apps',
   },
 
   {

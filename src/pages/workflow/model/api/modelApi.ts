@@ -28,7 +28,7 @@ const getRequestBodyParams = (params: any) => {
 };
 
 export async function selectModelListPage(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/selectModelListPage',
+  return request<any>('/api/act/re/model/selectModelListPage',
     {
       method: 'POST',
       headers: {
@@ -40,7 +40,7 @@ export async function selectModelListPage(params: any, options?: { [key: string]
 }
 
 export async function selectActReModelResultList(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/selectActReModelResultList',
+  return request<any>('/api/act/re/model/selectActReModelResultList',
     {
       method: 'POST',
       headers: {
@@ -52,7 +52,7 @@ export async function selectActReModelResultList(params: any, options?: { [key: 
 }
 
 export async function newModel(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/newModel',
+  return request<any>('/api/act/re/model/newModel',
     {
       method: 'POST',
       headers: {
@@ -64,7 +64,7 @@ export async function newModel(params: any, options?: { [key: string]: any }) {
 }
 
 export async function updateModelById(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/updateModelById',
+  return request<any>('/api/act/re/model/updateModelById',
     {
       method: 'POST',
       headers: {
@@ -76,7 +76,7 @@ export async function updateModelById(params: any, options?: { [key: string]: an
 }
 
 export async function deleteModelById(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/deleteModelById',
+  return request<any>('/api/act/re/model/deleteModelById',
     {
       method: 'POST',
       headers: {
@@ -87,7 +87,7 @@ export async function deleteModelById(params: any, options?: { [key: string]: an
     });
 }
 export async function deleteWholeModelById(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/deleteWholeModelById',
+  return request<any>('/api/act/re/model/deleteWholeModelById',
     {
       method: 'POST',
       headers: {
@@ -98,7 +98,7 @@ export async function deleteWholeModelById(params: any, options?: { [key: string
     });
 }
 export async function selectModelDetailsById(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/act/re/model/selectModelDetailsById',
+  return request<any>('/api/act/re/model/selectModelDetailsById',
     {
       method: 'POST',
       headers: {
@@ -112,7 +112,7 @@ export async function selectModelDetailsById(params: any, options?: { [key: stri
 
 
 export async function designModel(params: any, options?: { [key: string]: any }) {
-  return request<any>('/workflow/design/modeler',
+  return request<any>('/api/design/modeler',
     {
       method: 'GET',
       headers: {

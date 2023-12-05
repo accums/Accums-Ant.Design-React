@@ -17,6 +17,9 @@ export default (props: { actionRef: any, selectedRows: any }) => {
                onFinish={async () => {
                  alert(dataSource)
                }}
+               modalProps={{
+                 destroyOnClose: true,
+               }}
     >
       <Alert showIcon
              message={"请注意：委托合同数据提交后，将无法二次【提交】，且不可【配置样品】和【更新】委托合同数据。"}></Alert>
