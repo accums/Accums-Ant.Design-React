@@ -20,7 +20,7 @@ const getRequestBodyParams = (params: any) => {
   };
 };
 
-export async function listPage(params: any, options?: { [key: string]: any }) {
+export async function selectActReDefineListPage(params: any, options?: { [key: string]: any }) {
   return request<any>('/api/act/re/define/listPage',
     {
       method: 'POST',
@@ -34,6 +34,18 @@ export async function listPage(params: any, options?: { [key: string]: any }) {
 
 export async function updateSuspensionStatus(params: any, options?: { [key: string]: any }) {
   return request<any>('/api/act/re/define/updateSuspensionStatus',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: params,
+      ...(options || {}),
+    });
+}
+
+export async function getActReDefineImage(params: any, options?: { [key: string]: any }) {
+  return request<any>('/api/act/re/define/getActReDefineImage',
     {
       method: 'POST',
       headers: {

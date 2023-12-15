@@ -8,7 +8,7 @@ const Settings: ProLayoutProps & {
   title: '综合系统应用中心',
   navTheme: 'light',
   colorPrimary: '#1890ff',
-  layout: 'top',
+  layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,

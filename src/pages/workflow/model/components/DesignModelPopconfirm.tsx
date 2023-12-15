@@ -18,7 +18,7 @@ export default (props: { modelId: any }) => {
       }
     >
       <Button type={"primary"} style={{marginRight: '10px'}} size={"small"} ghost
-              icon={<AntDesignOutlined/>}>设计</Button>
+              icon={<AntDesignOutlined/>}>流程设计(旧)</Button>
     </Popconfirm>
   );
 }

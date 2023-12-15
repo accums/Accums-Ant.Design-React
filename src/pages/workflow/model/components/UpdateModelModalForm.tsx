@@ -1,11 +1,6 @@
-import {
-  ModalForm,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-} from '@ant-design/pro-components';
+import {ModalForm, ProFormSelect, ProFormText, ProFormTextArea,} from '@ant-design/pro-components';
 import {Button, Divider, message, Tag} from 'antd';
-import React, {} from "react";
+import React from "react";
 import {EditOutlined} from "@ant-design/icons";
 import {selectModelDetailsById, updateModelById} from "@/pages/workflow/model/api/modelApi";
 
@@ -43,6 +38,7 @@ export default (props: { actionRef: any, modelId: any }) => {
     >
 
       <Divider orientation="left">更新流程模型</Divider>
+      <ProFormText width="xl" name="version" label="版本号" disabled rules={[{required: true}]}/>
       <ProFormText disabled width="xl" name="modelId" label="流程模型ID_" rules={[{required: true}]}/>
       <ProFormSelect width="xl" name="tenantId" label="所属租户"
                      tooltip="租户设置可根据自身业务数据或者架构进行调整，此处只做参考。" rules={[{required: true}]}
@@ -68,7 +64,6 @@ export default (props: { actionRef: any, modelId: any }) => {
       <ProFormText width="xl" name="modelDesc" label="流程模型描述" tooltip="描述将会在保存后记录至metaInfo中"
                    rules={[{required: true}]}/>
 
-      <ProFormText width="xl" name="version" label="版本号" disabled rules={[{required: true}]}/>
 
       <ProFormTextArea width="xl" name="metaInfo" label="META_INFO_"
                        tooltip="此处用于扩展自身的业务数据，请不要使用name和description作为key，会被上面的数据覆盖，请填写JSON格式，系统已给出默认参考。"

@@ -122,3 +122,16 @@ export async function designModel(params: any, options?: { [key: string]: any })
       ...(options || {}),
     });
 }
+
+
+export async function getEditorXml(params: any, options?: { [key: string]: any }) {
+  return request<any>('/api/design/model/xml',
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
+      ...(options || {}),
+    });
+}

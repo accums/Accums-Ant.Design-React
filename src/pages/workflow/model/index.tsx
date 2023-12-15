@@ -1,17 +1,15 @@
 import type {ActionType} from '@ant-design/pro-components';
-import {
-  PageContainer,
-  ProTable,
-} from '@ant-design/pro-components';
+import {PageContainer, ProTable,} from '@ant-design/pro-components';
 import React, {useRef, useState} from 'react';
 import {selectModelListPage} from "@/pages/workflow/model/api/modelApi";
 import AddModel from "@/pages/workflow/model/components/AddModelModalForm";
 import {Tag} from "antd";
-import DesignModelModelForm from "@/pages/workflow/model/components/DesignModelModelForm";
 import UpdateModelModalForm from "@/pages/workflow/model/components/UpdateModelModalForm";
 import DeleteModelPopConFirm from "@/pages/workflow/model/components/DeleteModelPopconfirm";
 import DeleteWholeModelPopconfirm from "@/pages/workflow/model/components/DeleteWholeModelPopconfirm";
 import DeployModelModalFormTable from "@/pages/workflow/deploy/components/DeployModelModalFormTable";
+import DesignModelPopconfirm from './components/DesignModelPopconfirm';
+import DesignModelModelForm from './components/DesignModelModelForm';
 
 export default () => {
 
@@ -119,12 +117,13 @@ export default () => {
             }
           },
         }}
-        tableAlertRender={({selectedRowKeys}) => {
+        tableAlertRender={({selectedRows, selectedRowKeys}) => {
           if (selectedRowKeys.length === 1) {
             return [
               <DesignModelModelForm modelId={selectedRowKeys[0]} key={"DesignModelModelForm"}/>,
+              <DesignModelPopconfirm modelId={selectedRowKeys[0]} key={"DesignModelPopconfirm"}/>,
               <UpdateModelModalForm actionRef={actionRef} modelId={selectedRowKeys[0]} key={"UpdateModelModalForm"}/>,
-              <DeployModelModalFormTable modelId={selectedRowKeys[0]}/>
+              <DeployModelModalFormTable key={"DeployModelModalFormTable"} model={selectedRows[0]}/>
             ]
           }
           return []

@@ -1,15 +1,17 @@
 import type {ActionType} from '@ant-design/pro-components';
-import {
-  PageContainer,
-  ProTable,
-} from '@ant-design/pro-components';
-import React, {useRef} from 'react';
-import {listPage, updateSuspensionStatus} from "@/pages/workflow/define/api/defineApi";
+import {PageContainer, ProTable,} from '@ant-design/pro-components';
+import React, {useRef, useState} from 'react';
+import {selectActReDefineListPage, updateSuspensionStatus} from "@/pages/workflow/define/api/defineApi";
 import {Switch, Tag} from "antd";
+import StartDefineModalForm from './components/StartDefineModalForm';
+import ConfigDefineModalForm from './components/ConfigDefineModalForm';
+import DefinePictureModalForm from './components/DefinePictureModalForm';
 
 export default () => {
 
   const actionRef = useRef<ActionType>();
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
 
   return (
     <PageContainer>
@@ -108,7 +110,7 @@ export default () => {
         ]}
         request={
           async (params) => {
-            const result = await listPage(params);
+            const result = await selectActReDefineListPage(params);
             return {
               data: result.data.rows,
               success: result.success,
@@ -118,13 +120,28 @@ export default () => {
         }
         rowSelection={{
           type: "radio",
+          selectedRowKeys: selectedRowKeys,
         }}
         tableAlertRender={({selectedRowKeys}) => {
           if (selectedRowKeys.length === 1) {
-            return []
+            return [
+              <StartDefineModalForm actionRef={actionRef} key={'StartDefineModalForm'}/>,
+              <ConfigDefineModalForm actionRef={actionRef} key={'ConfigDefineModalForm'}/>,
+              <DefinePictureModalForm actionRef={actionRef} selectedRowKeys={selectedRowKeys[0]}
+                                      key={'DefinePictureModalForm'}/>
+            ]
           } else {
             return []
           }
+        }}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              if (!selectedRowKeys.includes(record.id)) {
+                setSelectedRowKeys([record.id])
+              }
+            },
+          };
         }}
         actionRef={actionRef}
         rowKey={(record) => record.id}
